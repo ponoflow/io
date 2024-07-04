@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inline Hover and Focus</title>
+  <style>
+    .hover-style { /* Default styles */
+      background-color: #800080; /* Base color */
+    }
+  </style>
+</head>
+<body>
+  <div id="example" class="hover-style" style="width: 200px; height: 200px;">
+    Hover or focus on me!
+  </div>
+
+  <script>
+    const element = document.getElementById('example');
+
+    // Define the hover effect
+    element.addEventListener('mouseover', () => {
+      element.style.backgroundColor = '#6A0DAD'; // Hover color
+    });
+
+    element.addEventListener('mouseout', () => {
+      element.style.backgroundColor = '#800080'; // Base color
+    });
+
+    // Define the focus effect
+    element.addEventListener('focus', () => {
+      element.style.backgroundColor = '#BA55D3'; // Focus color
+    });
+
+    element.addEventListener('blur', () => {
+      element.style.backgroundColor = '#800080'; // Base color
+    });
+
+    // Make the element focusable
+    element.setAttribute('tabindex', '0');
+  </script>
+</body>
+</html>
