@@ -21,13 +21,17 @@
     <script>
         function runTest() {
             const results = [];
+            const eventCount = 10000;
+            const elements = document.querySelectorAll('.test-class');
 
             // Test direct event listener with class selector
-            let elements = document.querySelectorAll('.test-class');
-            performance.mark('start-direct-class');
             elements.forEach(element => {
                 element.addEventListener('click', () => {});
             });
+            performance.mark('start-direct-class');
+            for (let i = 0; i < eventCount; i++) {
+                elements[i].click();
+            }
             performance.mark('end-direct-class');
             performance.measure('direct-class', 'start-direct-class', 'end-direct-class');
             results.push(performance.getEntriesByName('direct-class')[0].duration);
@@ -36,39 +40,52 @@
             });
 
             // Test direct event listener with attribute selector
-            elements = document.querySelectorAll('[data-test="test-attribute"]');
-            performance.mark('start-direct-attribute');
-            elements.forEach(element => {
+            const attributeElements = document.querySelectorAll('[data-test="test-attribute"]');
+            attributeElements.forEach(element => {
                 element.addEventListener('click', () => {});
             });
+            performance.mark('start-direct-attribute');
+            for (let i = 0; i < eventCount; i++) {
+                attributeElements[i].click();
+            }
             performance.mark('end-direct-attribute');
             performance.measure('direct-attribute', 'start-direct-attribute', 'end-direct-attribute');
             results.push(performance.getEntriesByName('direct-attribute')[0].duration);
-            elements.forEach(element => {
+            attributeElements.forEach(element => {
                 element.removeEventListener('click', () => {});
             });
 
             // Test event delegation with class selector
-            performance.mark('start-delegate-class');
-            document.addEventListener('click', function(event) {
+            function delegateClassHandler(event) {
                 if (event.target.matches('.test-class')) {
                     // Event handler logic
                 }
-            });
+            }
+            document.addEventListener('click', delegateClassHandler);
+            performance.mark('start-delegate-class');
+            for (let i = 0; i < eventCount; i++) {
+                elements[i].click();
+            }
             performance.mark('end-delegate-class');
             performance.measure('delegate-class', 'start-delegate-class', 'end-delegate-class');
             results.push(performance.getEntriesByName('delegate-class')[0].duration);
+            document.removeEventListener('click', delegateClassHandler);
 
             // Test event delegation with attribute selector
-            performance.mark('start-delegate-attribute');
-            document.addEventListener('click', function(event) {
+            function delegateAttributeHandler(event) {
                 if (event.target.matches('[data-test="test-attribute"]')) {
                     // Event handler logic
                 }
-            });
+            }
+            document.addEventListener('click', delegateAttributeHandler);
+            performance.mark('start-delegate-attribute');
+            for (let i = 0; i < eventCount; i++) {
+                attributeElements[i].click();
+            }
             performance.mark('end-delegate-attribute');
             performance.measure('delegate-attribute', 'start-delegate-attribute', 'end-delegate-attribute');
             results.push(performance.getEntriesByName('delegate-attribute')[0].duration);
+            document.removeEventListener('click', delegateAttributeHandler);
 
             console.log('Test Results (in milliseconds):');
             console.log('Direct event listener with class selector: ', results[0]);
