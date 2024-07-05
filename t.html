@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Delegation Speed Test</title>
+</head>
+<body>
+    <div id="container">
+        <!-- Generating a large number of elements for testing -->
+        <script>
+            for (let i = 0; i < 10000; i++) {
+                const div = document.createElement('div');
+                div.className = 'test-class';
+                div.setAttribute('data-test', 'test-attribute');
+                document.getElementById('container').appendChild(div);
+            }
+        </script>
+    </div>
+
+    <script>
+        function runTest() {
+            const results = [];
+
+            // Test direct event listener with class selector
+            let elements = document.querySelectorAll('.test-class');
+            performance.mark('start-direct-class');
+            elements.forEach(element => {
+                element.addEventListener('click', () => {});
+            });
+            performance.mark('end-direct-class');
+            performance.measure('direct-class', 'start-direct-class', 'end-direct-class');
+            results.push(performance.getEntriesByName('direct-class')[0].duration);
+            elements.forEach(element => {
+                element.removeEventListener('click', () => {});
+            });
+
+            // Test direct event listener with attribute selector
+            elements = document.querySelectorAll('[data-test="test-attribute"]');
+            performance.mark('start-direct-attribute');
+            elements.forEach(element => {
+                element.addEventListener('click', () => {});
+            });
+            performance.mark('end-direct-attribute');
+            performance.measure('direct-attribute', 'start-direct-attribute', 'end-direct-attribute');
+            results.push(performance.getEntriesByName('direct-attribute')[0].duration);
+            elements.forEach(element => {
+                element.removeEventListener('click', () => {});
+            });
+
+            // Test event delegation with class selector
+            performance.mark('start-delegate-class');
+            document.addEventListener('click', function(event) {
+                if (event.target.matches('.test-class')) {
+                    // Event handler logic
+                }
+            });
+            performance.mark('end-delegate-class');
+            performance.measure('delegate-class', 'start-delegate-class', 'end-delegate-class');
+            results.push(performance.getEntriesByName('delegate-class')[0].duration);
+
+            // Test event delegation with attribute selector
+            performance.mark('start-delegate-attribute');
+            document.addEventListener('click', function(event) {
+                if (event.target.matches('[data-test="test-attribute"]')) {
+                    // Event handler logic
+                }
+            });
+            performance.mark('end-delegate-attribute');
+            performance.measure('delegate-attribute', 'start-delegate-attribute', 'end-delegate-attribute');
+            results.push(performance.getEntriesByName('delegate-attribute')[0].duration);
+
+            console.log('Test Results (in milliseconds):');
+            console.log('Direct event listener with class selector: ', results[0]);
+            console.log('Direct event listener with attribute selector: ', results[1]);
+            console.log('Event delegation with class selector: ', results[2]);
+            console.log('Event delegation with attribute selector: ', results[3]);
+        }
+
+        window.onload = runTest;
+    </script>
+</body>
+</html>
