@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React from CDN</title>
+    <!-- React and ReactDOM from CDN -->
+    <script src="https://unpkg.com/@mui/material@5.16.0/umd/material-ui.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <!-- Babel for JSX transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // React component
+        function App() {
+            return (
+                <div>
+                    <h1>Hello,ss React!</h1>
+                    <p>This is a simple React app running from a CDN.</p>
+                </div>
+            );
+        }
+
+        // Render React component to the DOM
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

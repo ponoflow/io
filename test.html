@@ -1,0 +1,24 @@
+function prettyPrintJSON(jsonString) {
+    try {
+        // Parse the JSON string
+        const jsonObject = JSON.parse(jsonString);
+
+        // Stringify the JSON object with pretty print formatting
+        const prettyJSON = JSON.stringify(jsonObject, null, 2);
+
+        // Create a <pre> tag element
+        const preTag = document.createElement('pre');
+
+        // Set the text content of the <pre> tag to the pretty JSON string
+        preTag.textContent = prettyJSON;
+
+        // Append the <pre> tag to the body of the document
+        document.body.appendChild(preTag);
+    } catch (error) {
+        console.error('Invalid JSON string:', error);
+    }
+}
+
+// Example usage
+const jsonString = '{"name": "John", "age": 30, "city": "New York"}';
+prettyPrintJSON(jsonString);
