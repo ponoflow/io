@@ -5,5 +5,5 @@ const doc = new DOMParser().parseFromString(`<link rel="preconnect" href="https:
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=${window.GOOGLE_FONTS||'Roboto'}:wght@300;400;500;700&display=swap" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />`, 'text/html');
-    doc.querySelectorAll('link').forEach(append)
+    doc.querySelectorAll('link').forEach(e=>append(e))
 })();
