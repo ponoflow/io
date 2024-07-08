@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.originalBodyOverflow = document.body.style.overflow;
             document.body.style.overflow = 'hidden';
             document.body.style.margin = '0';
-            document.body.children.forEach(e=>this.wrapper.appendChild(e))
+            Array.from(document.body.children).forEach(e=>this.wrapper.appendChild(e))
             document.body.appendChild(this.wrapper);
             window.scrollTo(0, 0);
         }
