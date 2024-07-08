@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.margin = '0';
             Array.from(document.body.children).forEach(e=>this.wrapper.appendChild(e))
             document.body.appendChild(this.wrapper);
-            window.scrollTo(0, 0);
         }
 
         unwrap() {
@@ -36,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.style.overflow = this.originalBodyOverflow;
                 document.body.style.margin = '';
                 document.body.innerHTML = this.wrapper.innerHTML;
-                window.scrollTo(this.scrollPosition.left, this.scrollPosition.top);
                 this.wrapper.remove();
             }, { once: true });
         }
