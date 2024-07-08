@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+
     class ViewportWrapper {
         constructor() {
             this.wrapper = document.createElement('div');
@@ -48,4 +48,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // To unwrap back to fullscreen:
     viewportWrapper.unwrap();
-});
