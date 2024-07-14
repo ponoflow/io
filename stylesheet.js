@@ -12,12 +12,15 @@ class StyleSheetWrapper {
           const rules = Array.from(sheet.cssRules);
           rules.forEach((rule, ruleIndex) => {
             if (rule.style) {
+                var obj={},array=rule.cssText.split('{')[1]
+                    .split(/[\;\ ]?+([a-z\-]+)\:/).slice(1);
+                    while(array.length)obj[array.shift()]=array.shift();
               allRules.push({
                 sheetIndex,
                 ruleIndex,
                 selectorText: rule.selectorText,
                 cssText: rule.cssText,
-                style: rule.style
+                style: obj
               });
             }
           });
@@ -25,6 +28,7 @@ class StyleSheetWrapper {
           console.warn("Failed to access stylesheet:", e);
         }
       });
+  
       return allRules;
     }
     getRuleApplicableElements(selector) {
@@ -59,16 +63,21 @@ class StyleSheetWrapper {
         });
         return variables;
     }
-    // Method to find all CSS rules that use a CSS variable
-    findRulesUsingVariable(variableName) {
-        let variableRules = [];
+    collectRefs() {
+        let variables = [];
         this.rules.forEach(rule => {
-        // Check if the rule's CSS text contains the variable
-        if (rule.cssText.includes(`var(${variableName}`)) {
-            variableRules.push(rule);
-        }
+          for (let i = 0; i < rule.style.length; i++) {
+            const property = rule.style[i];
+            if (property.test(/var\(\ ?\-)/) {
+              variables.push({
+                selectorText: rule.selectorText,
+                variable: property,
+                value: rule.style.getPropertyValue(property)
+              });
+            }
+          }
         });
-        return variableRules;
+        return variables;
     }
     // Method to select rules by selector
     getRulesBySelector(selector) {
@@ -110,22 +119,3 @@ class StyleSheetWrapper {
   function cssO(){
     return new StyleSheetWrapper();
   }
-  // Example usage
-  // const styleWrapper = new StyleSheetWrapper();
-  
-  // Get all rules with a specific selector
-  // const rules = styleWrapper.getRulesBySelector('.my-class');
-  // console.log(rules);
-  
-  // Update a rule with new styles
-  // styleWrapper.updateRule('.my-class', { backgroundColor: 'blue', color: 'white' });
-  // Or update using a string
-  // styleWrapper.updateRule('.my-class', 'background-color: green; color: yellow;');
-  
-  // Get all rules where 'background' property is set
-  // const backgroundRules = styleWrapper.getRulesByProperty('background');
-  // console.log(backgroundRules);
-  
-  // Reload rules if needed
-  // styleWrapper.reloadRules();
-
