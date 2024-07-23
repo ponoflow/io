@@ -172,4 +172,8 @@ var TAILWINDCLASSES={"bg-[url('\/remote-src\/blocks\/marketing-ui\/authenticatio
 TAILWINDCLASSES.rev={};Object.keys(TAILWINDCLASSES).map((e,i)=>TAILWINDCLASSES.rev[TAILWINDCLASSES[e]]=e);
 function unYina(str){ if(!(str=document.querySelector('mapparta').textContent)) return ''; 
     document.querySelector('mapparta').remove();
-     str.split('').map(e=>TAILWINDCLASSES.rev[e]||e).join('').split('\n').slice(3).map((e,i)=>document.querySelectorAll('['+String.fromCodePoint(i+13333)+']').forEach(d=>d.setAttribute("class", e)))}; unYina();
+     str.split('').map(e=>TAILWINDCLASSES.rev[e]||e).join('').split('\n').slice(3).map((e,i)=>document.querySelectorAll('['+String.fromCodePoint(i+13333)+']').forEach(d=>{
+        d.setAttribute("class", e);
+        d.removeAttribute(String.fromCodePoint(i+13333));
+    }))
+    }; unYina();
