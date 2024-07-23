@@ -172,4 +172,4 @@ var TAILWINDCLASSES={"bg-[url('\/remote-src\/blocks\/marketing-ui\/authenticatio
 TAILWINDCLASSES.rev={};Object.keys(TAILWINDCLASSES).map((e,i)=>TAILWINDCLASSES.rev[TAILWINDCLASSES[e]]=e);
 function unYina(str){ if(!(str=Get1('mapparta').textContent)) return ''; 
     Get1('mapparta').remove();
-     str.split('').map(e=>TAILWINDCLASSES.rev[e]||e).join('').split('\n').slice(3).map((e,i)=>Get('['+String.fromCodePoint(i+13333)+']').forEach(d=>d.setAttribute("class", e)))};
+     str.split('').map(e=>TAILWINDCLASSES.rev[e]||e).join('').split('\n').slice(3).map((e,i)=>Get('['+String.fromCodePoint(i+13333)+']').forEach(d=>d.setAttribute("class", e)))}; unYina();
