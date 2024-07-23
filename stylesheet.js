@@ -12,15 +12,16 @@ class StyleSheetWrapper {
           const rules = Array.from(sheet.cssRules);
           rules.forEach((rule, ruleIndex) => {
             if (rule.style) {
-                var obj={},array=rule.cssText.split('{')[1]
-                    .split(/[\;\ ]?+([a-z\-]+)\:/).slice(1);
-                    while(array.length)obj[array.shift()]=array.shift();
+                var obj={},array=rule.cssText.split(/\{|\}/)[1]
+                    .split(/[\;\ ]?[\;\ ]?([a-z\-]+)\:/).slice(1);
+                    while(array.length)obj[array.shift().trim()]=array.shift().trim();
               allRules.push({
                 sheetIndex,
                 ruleIndex,
                 selectorText: rule.selectorText,
                 cssText: rule.cssText,
-                style: obj
+                css: obj,
+                style: rule.style
               });
             }
           });
@@ -68,7 +69,7 @@ class StyleSheetWrapper {
         this.rules.forEach(rule => {
           for (let i = 0; i < rule.style.length; i++) {
             const property = rule.style[i];
-            if (property.test(/var\(\ ?\-)/) {
+            if (property.test(/var\(\ ?\-/)) {
               variables.push({
                 selectorText: rule.selectorText,
                 variable: property,
@@ -80,10 +81,43 @@ class StyleSheetWrapper {
         return variables;
     }
     // Method to select rules by selector
+    
     getRulesBySelector(selector) {
       return this.rules.filter(rule => rule.selectorText === selector);
     }
-  
+    getMediaQueryRules(screenWidth) {
+        let matchingRules = [];
+        this.stylesheets.forEach((sheet, sheetIndex) => {
+          try {
+            const rules = Array.from(sheet.cssRules);
+            rules.forEach((rule, ruleIndex) => {
+              if (rule instanceof CSSMediaRule) {
+                const media = rule.media;
+                if (media.mediaText.includes('min-width') || media.mediaText.includes('max-width')) {
+                  let minWidthMatch = media.mediaText.match(/min-width:\s*(\d+)px/);
+                  let maxWidthMatch = media.mediaText.match(/max-width:\s*(\d+)px/);
+                  let minWidth = minWidthMatch ? parseInt(minWidthMatch[1]) : 0;
+                  let maxWidth = maxWidthMatch ? parseInt(maxWidthMatch[1]) : Infinity;
+      
+                  if (screenWidth >= minWidth && screenWidth <= maxWidth) {
+                    matchingRules.push({
+                      sheetIndex,
+                      ruleIndex,
+                      mediaText: media.mediaText,
+                      cssText: rule.cssText,
+                      rules: rule.cssRules
+                    });
+                  }
+                }
+              }
+            });
+          } catch (e) {
+            console.warn("Failed to access stylesheet:", e);
+          }
+        });
+      
+        return matchingRules;
+      }
     // Method to update a rule by selector
     updateRule(selector, newStyles) {
       const rulesToUpdate = this.getRulesBySelector(selector);
