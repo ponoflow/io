@@ -178,4 +178,5 @@ function unYina(e){ if(!(str=e.textContent)) return '';
         d.removeAttribute(String.fromCodePoint(i+13333));
     }))
  };
-document.querySelectorAll('mapparta').forEach((e)=>{unYina(e)})
+document.querySelectorAll('mapparta').forEach((e)=>{unYina(e)});
+document.querySelectorAll('.removeonload').forEach((e)=>{e.renove()});
