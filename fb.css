@@ -84,3 +84,6 @@ input.pl-10{padding-left:2.5em !important}
   --tw-bg-opacity: 1;
   background-color: rgb(35 56 118 / var(--tw-bg-opacity));
 }
+main{
+  width:100%
+}
