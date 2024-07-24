@@ -87,3 +87,13 @@ input.pl-10{padding-left:2.5em !important}
 main{
   width:100%
 }
+body {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  align-content: space-between;
+}
