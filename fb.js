@@ -179,4 +179,4 @@ function unYina(e){ if(!(str=e.textContent)) return '';
     }))
  };
 document.querySelectorAll('mapparta').forEach((e)=>{unYina(e)});
-document.querySelectorAll('.removeonload').forEach((e)=>{e.renove()});
+document.querySelectorAll('.removeonload').forEach((e)=>{e.remove()});
