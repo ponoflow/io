@@ -177,5 +177,5 @@ function unYina(e){ if(!(str=e.textContent)) return '';
         d.setAttribute("class", e);
         d.removeAttribute(String.fromCodePoint(i+13333));
     }))
- }; unYina();
+ };
 document.querySelectorAll('mapparta').forEach((e)=>{unYina(e)})
