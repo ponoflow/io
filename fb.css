@@ -193,12 +193,21 @@ body {
   justify-content:space-around;
   align-content:space-around;
 }
-.strech {
+.grow {
   justify-content:stretch;
   align-content:stretch;
 }
-.strech>*{
+.grow>*{
  flex-grow:1
+}
+.gap10>*{
+ gap:10;
+}
+.gap15>*{
+ gap:15;
+}
+.gap5>*{
+ gap:5;
 }
 .hugs {
   justify-content:center;
