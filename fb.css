@@ -144,6 +144,17 @@ body {
   align-items: flex-start;
   justify-content: flex-end;
 }
+.germs {
+  justify-content:space-between
+}.cozy {
+  justify-content:space-around;
+  align-content:space-around;
+}
+.hugs {
+  justify-content:center;
+  align-content:center;
+  align-items:center;
+}
 .gbl {
   display: grid;
   justify-items: start;
