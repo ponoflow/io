@@ -204,17 +204,26 @@ body {
   justify-content:stretch;
   align-content:stretch;
 }
-.grow>*{
+.grow{
  flex-grow:1
 }
-.gap10>*{
+.gap10{
  gap:10;
 }
-.gap15>*{
+.gap15{
  gap:15;
 }
-.gap5>*{
+.gap5{
  gap:5;
+}
+.gap20{
+ gap:20;
+}
+.gap25{
+ gap:25;
+}
+.gap30{
+ gap:30;
 }
 .hugs {
   justify-content:center;
