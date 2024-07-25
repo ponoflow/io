@@ -181,12 +181,24 @@ body {
   align-items: flex-start;
   justify-content: flex-start;
 }
-
+.rtl {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
 .germs {
   justify-content:space-between
 }.cozy {
   justify-content:space-around;
   align-content:space-around;
+}
+.strech {
+  justify-content:stretch;
+  align-content:stretch;
+}
+.strech>*{
+ flex-grow:1
 }
 .hugs {
   justify-content:center;
