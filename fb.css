@@ -18,6 +18,50 @@ input.pl-10{padding-left:2.5em !important}
 
 
 @media (min-width: 768px) {
+    .md\:py-16 {
+        padding-top: 4rem;
+        padding-bottom: 4rem
+    }
+}
+
+@media (min-width: 1024px) {
+    .lg\:flex {
+        display: flex
+    }
+
+    .lg\:w-64 {
+        width: 16rem
+    }
+
+    .lg\:w-auto {
+        width: auto
+    }
+
+    .lg\:flex-1 {
+        flex: 1 1 0%
+    }
+
+    .lg\:items-center {
+        align-items: center
+    }
+
+    .lg\:justify-end {
+        justify-content: flex-end
+    }
+}
+
+@media (min-width: 1536px) {
+    .\32xl\:px-0 {
+        padding-left: 0px;
+        padding-right: 0px
+    }
+}
+
+
+.sm\:pl-10 {
+    padding-left: 1.25rem
+}
+@media (min-width: 768px) {
     .md\:mt-8 {
         margin-top:2rem
     }
