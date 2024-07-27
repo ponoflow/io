@@ -780,8 +780,8 @@ body {
   justify-content:stretch;
   align-content:stretch;
 }
-.grow{
- flex-grow:1
+.grow>*{
+  flex-grow:1
 }
 .gap10{
  gap:10px;
