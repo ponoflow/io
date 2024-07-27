@@ -375,22 +375,22 @@ body {
  flex-grow:1
 }
 .gap10{
- gap:10;
+ gap:10px;
 }
 .gap15{
- gap:15;
+ gap:15px;
 }
 .gap5{
- gap:5;
+ gap:5px;
 }
 .gap20{
- gap:20;
+ gap:20px;
 }
 .gap25{
- gap:25;
+ gap:25px;
 }
 .gap30{
- gap:30;
+ gap:30px;
 }
 .hugs {
   justify-content:center;
