@@ -1,0 +1,47 @@
+class AudioQueue {
+    constructor() {
+        this.queue = Array.from(document.querySelectorAll('audio'));
+		this.player=MakePlay();	
+		this.player.src = '';
+        this.observer = new MutationObserver(this.observeMutations.bind(this));
+        this.observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+        });
+        // Take records immediately to process existing audio elements
+        this.observer.takeRecords();
+    }
+    observeMutations(mutations) {
+        mutations.forEach((mutation) => {
+            if(mutation.addedNodes) {
+                mutation.addedNodes.forEach((node) => {
+                    if(node.className === 'waves') {
+                        this.addToQueue(node);
+                    }
+                });
+            }
+        });
+    }
+    addToQueue(audioElement) {
+        this.queue.push(audioElement);
+    }
+    playNextAudio(){
+        if(this.queue.length === 0) {
+            console.log('No audio elements in the queue.');
+            return;
+        }
+        this.player.src = this.queue.shift().textContent;
+        this.player.play();
+        this.player.addEventListener('ended', () => {
+            if(this.queue.length > 0) {
+                this.playNextAudio();
+            }
+        });
+    }
+}
+var AUDIO_LOOP = new AudioQueue();
+
+document.body.onclick=function(){
+	AUDIO_LOOP.playNextAudio();
+	document.body.onclick	="";
+}
