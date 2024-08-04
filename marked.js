@@ -155,7 +155,7 @@ function doMarkUp(el=".markup", string=''){
     while(item=target[++i]){
         let buffer = '';
         string=string||$(item).html();
-        $(item).html(marked.parse(decodeHexEntities(indentCodeMD(item))))
+        $(item).html(marked.parse(decodeHexEntities(indentCodeMD(string))))
         .find("code").attr("class","language-javascript");
         Prism.highlightAll();
         // Simulate streaming chunks of markdown data
