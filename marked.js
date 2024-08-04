@@ -31,7 +31,7 @@ class MarkedClass {
             { pattern: /```(\w+)?\n([\s\S]*?)```/g, replacement: `<pre><code class="language-javascript">$1</code></pre>` },
             
             // Inline code
-            { pattern: /`([^`]+)`/g, replacement: `<pre><code class="language-javascript">$1</code></pre>` },
+            { pattern: /`([^`]+)`/g, replacement: `<code class="language-javascript">$1</code>` },
             
             // Links
             { pattern: /\[([^\]]+)\]\(([^)]+)\)/g, replacement: '<a href="$2">$1</a>' },
