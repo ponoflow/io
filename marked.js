@@ -80,7 +80,7 @@ class MarkedClass {
 
 var marked = new MarkedClass();
 var ezMarkup = (el, text)=>{
-	text=decodeHexEntities(indentCodeMD(text||el.innerHTM));
+	text=decodeHexEntities(indentCodeMD(text||el.innerHTML));
 	el.innerHTML=marked.parse(text);
 	Prism.highlightAll();
 };
