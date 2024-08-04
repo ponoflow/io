@@ -19,9 +19,6 @@ class MarkedClass {
             { pattern: /^(#{1,6})\s(.+)$/gm, replacement: (_, hashes, content) => `<h${hashes.length}>${content}</h${hashes.length}>` },
             
             // Headers (new style with asterisks)
-            { pattern: /^\*\s(.+)$/gm, replacement: '<h1>$1</h1>' },
-            { pattern: /^\*\*\s(.+)$/gm, replacement: '<h2>$1</h2>' },
-            { pattern: /^\*\*\*\s(.+)$/gm, replacement: '<h3>$1</h3>' },
             
             // Bold (both styles)
             { pattern: /\*\*(.*?)\*\*/g, replacement: '<strong>$1</strong>' },
