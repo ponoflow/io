@@ -14,7 +14,6 @@ n.call(t,s,t[s],a||s),i=t[s],"Object"!==(o=j.util.type(i))||r[l(i)]?"Array"!==o|
 
 class MarkedClass {
     constructor() {
-        this.highlighter = new TokenBasedSyntaxHighlighter();
         this.rules = [
             // Headers (original style)
             { pattern: /^(#{1,6})\s(.+)$/gm, replacement: (_, hashes, content) => `<h${hashes.length}>${content}</h${hashes.length}>` },
