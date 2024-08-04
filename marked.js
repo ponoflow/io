@@ -156,6 +156,7 @@ function doMarkUp(el=".markup", string=''){
         let buffer = '';
         string=string||$(item).html();
         var done=marked.parse(decodeHexEntities(indentCodeMD(string)));
+        var done=marked.parse(string);
         $(item).html(done)
         .find("code").attr("class","language-javascript");
         Prism.highlightAll();
