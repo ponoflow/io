@@ -155,10 +155,12 @@ function doMarkUp(el=".markup", string=''){
     while(item=target[++i]){
         let buffer = '';
         string=string||$(item).html();
-        $(item).html(marked.parse(decodeHexEntities(indentCodeMD(string))))
+        var done=marked.parse(decodeHexEntities(indentCodeMD(string)));
+        $(item).html()
         .find("code").attr("class","language-javascript");
         Prism.highlightAll();
         // Simulate streaming chunks of markdown data
-        const chunks = [md];
+        const chunks = done;
     }
+    return done;
 }
