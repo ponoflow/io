@@ -82,7 +82,7 @@ var marked = new MarkedClass();
 var ezMarkup = (el, text)=>{
 	text=decodeHexEntities(indentCodeMD(text||el.innerHTML));
 	text=text.split('\"').join('"');
-	el.innerHTML=marked.parse(text);
+	el.innerHTML=marked.parse(text).replace(/\\"/g,'"');
 	Prism.highlightAll();
 };
 
