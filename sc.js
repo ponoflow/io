@@ -1,4 +1,4 @@
-{
+var SHORT_CUTS={
   "w": {
     "ww": "window",
     "sf": "self",
